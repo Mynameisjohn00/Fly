@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tallgrass Flyrod Company Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Serif+Pro&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Serif Pro', serif;
+        }
+
+        body {
+            background-color: #f5e6d3;
+            color: #2c1810;
+            width: 100%;
+            overflow-x: hidden;
+            padding-top: 110px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(245, 230, 211, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #c4a484;
+            box-shadow: 0 2px 15px rgba(139, 69, 19, 0.1);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: block;
+            transition: transform 0.3s ease;
+            border: 3px solid #8b4513;
+            box-shadow: 0 3px 10px rgba(139, 69, 19, 0.3);
+            margin-right: 15px;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #582f0e;
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c1810;
+            font-size: 1.1rem;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: #8b4513;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #8b4513;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #2c1810;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media screen and (max-width: 400px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(245, 230, 211, 0.98);
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        .blog-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #2c1810;
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .blog-post {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-bottom: 1px solid #c4a484;
+            background-color: rgba(245, 230, 211, 0.9);
+            border-radius: 5px;
+            box-shadow: 0 3px 15px rgba(139, 69, 19, 0.1);
+        }
+        
+        .post-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #2c1810;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        
+        .post-meta {
+            color: #8b4513;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        
+        .blog-post p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #2c1810;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #8b4513;
+            font-size: 14px;
+            border-top: 1px solid #c4a484;
+            margin-top: 40px;
+            background-color: rgba(245, 230, 211, 0.95);
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+
+            .blog-title {
+                font-size: 24px;
+            }
+
+            .logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            main {
+                padding: 20px 15px;
+            }
+
+            .blog-post {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            .post-title {
+                font-size: 22px;
+            }
+
+            .blog-post p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding-top: 80px;
+            }
+
+            nav {
+                padding: 15px;
+            }
+
+            .blog-title {
+                font-size: 20px;
+            }
+
+            main {
+                padding: 15px 10px;
+            }
+
+            .blog-post {
+                padding: 15px;
+                margin-bottom: 25px;
+            }
+
+            .post-title {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            .post-meta {
+                font-size: 0.8em;
+                margin-bottom: 15px;
+            }
+
+            .blog-post p {
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+            }
+
+            footer {
+                padding: 20px 0;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <img src="../Images/fish.png" alt="Fish Logo">
+            </div>
+            <h1 class="company-name">Tall Grass Flyrod Company</h1>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="nav-links">
+                <a href="../Fly.html#portfolio">Portfolio</a>
+                <a href="blog.html">Blog</a>
+                <a href="../rods/rods.html">Bamboo Rods</a>
+                <a href="../shop/shop.html">Shop</a>
+                <a href="../about/about.html">About</a>
+            </div>
+        </nav>
+        
+        <main>
+            <article class="blog-post">
+                <h2 class="post-title">Spring Fishing on the Prairie</h2>
+                <div class="post-meta">Posted on April 15, 2025</div>
+                <p>
+                    The tall grasses sway gently in the morning breeze as the sun begins to rise over the eastern horizon. It's that magical time of year when the streams run clear and the fish begin their spring feeding patterns. We've been testing our new 4-weight bamboo rod on the local streams with remarkable results.
+                </p>
+                <p>
+                    Dry fly action has been excellent in the early mornings and late evenings, with several nice browns and brookies coming to hand. The delicate presentation of our handcrafted rods makes all the difference when targeting these wary fish.
+                </p>
+            </article>
+            
+            <article class="blog-post">
+                <h2 class="post-title">The Art of Bamboo: Crafting the Perfect Rod</h2>
+                <div class="post-meta">Posted on April 3, 2025</div>
+                <p>
+                    There's something special about a handcrafted bamboo fly rod that modern materials simply cannot replicate. The warmth of the cane, the subtle flex, the connection to tradition – these are the qualities we strive to imbue in every rod that leaves our workshop.
+                </p>
+                <p>
+                    This month, we're focusing on our traditional 7'6" 5-weight, perfect for medium-sized streams and versatile enough for both dry fly and light nymphing presentations. Each rod takes approximately 50 hours of hands-on craftsmanship from splitting the bamboo to the final coat of varnish.
+                </p>
+            </article>
+            
+            <article class="blog-post">
+                <h2 class="post-title">Conservation Efforts in the Tallgrass Region</h2>
+                <div class="post-meta">Posted on March 22, 2025</div>
+                <p>
+                    As anglers and craftsmen deeply connected to our waterways, we believe strongly in protecting the delicate ecosystems that support our passion. This spring, we're partnering with local conservation groups to improve habitat along several key stretches of our home waters.
+                </p>
+                <p>
+                    Join us this Saturday for our stream cleanup event. Bring your waders and a willing spirit – lunch will be provided, and we'll be demonstrating some traditional casting techniques after the work is done.
+                </p>
+            </article>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Tallgrass Flyrod Company. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+            }
+        });
+
+        // Add click event to hamburger menu
+        document.querySelector('.hamburger').addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>
