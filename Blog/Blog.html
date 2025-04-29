@@ -157,10 +157,55 @@
             letter-spacing: 1px;
         }
 
-        main {
-            max-width: 800px;
+        .content-wrapper {
+            display: flex;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+        .stream-box {
+            width: 270px;
+            background-color: rgba(245, 230, 211, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 3px 15px rgba(139, 69, 19, 0.1);
+            padding: 15px;
+            height: fit-content;
+            position: sticky;
+            top: 130px;
+            margin-top: 40px;
+        }
+
+        .stream-box h3 {
+            font-family: 'Playfair Display', serif;
+            color: #2c1810;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .stream-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+
+        .stream-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            padding: 40px 0;
         }
         
         .blog-post {
@@ -278,6 +323,21 @@
                 font-size: 12px;
             }
         }
+
+        @media screen and (max-width: 1200px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            .stream-box {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                position: static;
+            }
+            main {
+                padding: 20px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -301,40 +361,56 @@
             </div>
         </nav>
         
-        <main>
-            <article class="blog-post">
-                <h2 class="post-title">Spring Fishing on the Prairie</h2>
-                <div class="post-meta">Posted on April 15, 2025</div>
-                <p>
-                    The tall grasses sway gently in the morning breeze as the sun begins to rise over the eastern horizon. It's that magical time of year when the streams run clear and the fish begin their spring feeding patterns. We've been testing our new 4-weight bamboo rod on the local streams with remarkable results.
-                </p>
-                <p>
-                    Dry fly action has been excellent in the early mornings and late evenings, with several nice browns and brookies coming to hand. The delicate presentation of our handcrafted rods makes all the difference when targeting these wary fish.
-                </p>
-            </article>
+        <div class="content-wrapper">
+            <div class="stream-box">
+                <h3>Live Stream</h3>
+                <div class="stream-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/ZZvTiISryoY" 
+                        title="Moosehead Lake at Rockwood, Maine - The Birches Resort, CAM 2"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
             
-            <article class="blog-post">
-                <h2 class="post-title">The Art of Bamboo: Crafting the Perfect Rod</h2>
-                <div class="post-meta">Posted on April 3, 2025</div>
-                <p>
-                    There's something special about a handcrafted bamboo fly rod that modern materials simply cannot replicate. The warmth of the cane, the subtle flex, the connection to tradition – these are the qualities we strive to imbue in every rod that leaves our workshop.
-                </p>
-                <p>
-                    This month, we're focusing on our traditional 7'6" 5-weight, perfect for medium-sized streams and versatile enough for both dry fly and light nymphing presentations. Each rod takes approximately 50 hours of hands-on craftsmanship from splitting the bamboo to the final coat of varnish.
-                </p>
-            </article>
-            
-            <article class="blog-post">
-                <h2 class="post-title">Conservation Efforts in the Tallgrass Region</h2>
-                <div class="post-meta">Posted on March 22, 2025</div>
-                <p>
-                    As anglers and craftsmen deeply connected to our waterways, we believe strongly in protecting the delicate ecosystems that support our passion. This spring, we're partnering with local conservation groups to improve habitat along several key stretches of our home waters.
-                </p>
-                <p>
-                    Join us this Saturday for our stream cleanup event. Bring your waders and a willing spirit – lunch will be provided, and we'll be demonstrating some traditional casting techniques after the work is done.
-                </p>
-            </article>
-        </main>
+            <main>
+                <article class="blog-post">
+                    <h2 class="post-title">Spring Fishing on the Prairie</h2>
+                    <div class="post-meta">Posted on April 15, 2025</div>
+                    <p>
+                        The tall grasses sway gently in the morning breeze as the sun begins to rise over the eastern horizon. It's that magical time of year when the streams run clear and the fish begin their spring feeding patterns. We've been testing our new 4-weight bamboo rod on the local streams with remarkable results.
+                    </p>
+                    <p>
+                        Dry fly action has been excellent in the early mornings and late evenings, with several nice browns and brookies coming to hand. The delicate presentation of our handcrafted rods makes all the difference when targeting these wary fish.
+                    </p>
+                </article>
+                
+                <article class="blog-post">
+                    <h2 class="post-title">The Art of Bamboo: Crafting the Perfect Rod</h2>
+                    <div class="post-meta">Posted on April 3, 2025</div>
+                    <p>
+                        There's something special about a handcrafted bamboo fly rod that modern materials simply cannot replicate. The warmth of the cane, the subtle flex, the connection to tradition – these are the qualities we strive to imbue in every rod that leaves our workshop.
+                    </p>
+                    <p>
+                        This month, we're focusing on our traditional 7'6" 5-weight, perfect for medium-sized streams and versatile enough for both dry fly and light nymphing presentations. Each rod takes approximately 50 hours of hands-on craftsmanship from splitting the bamboo to the final coat of varnish.
+                    </p>
+                </article>
+                
+                <article class="blog-post">
+                    <h2 class="post-title">Conservation Efforts in the Tallgrass Region</h2>
+                    <div class="post-meta">Posted on March 22, 2025</div>
+                    <p>
+                        As anglers and craftsmen deeply connected to our waterways, we believe strongly in protecting the delicate ecosystems that support our passion. This spring, we're partnering with local conservation groups to improve habitat along several key stretches of our home waters.
+                    </p>
+                    <p>
+                        Join us this Saturday for our stream cleanup event. Bring your waders and a willing spirit – lunch will be provided, and we'll be demonstrating some traditional casting techniques after the work is done.
+                    </p>
+                </article>
+            </main>
+        </div>
         
         <footer>
             <p>&copy; 2025 Tallgrass Flyrod Company. All rights reserved.</p>

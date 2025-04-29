@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>About - Tall Grass Flyrod Company</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Serif+Pro&family=Bookman+Old+Style:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/[YOUR-KIT-CODE].css">
     <style>
         * {
             margin: 0;
@@ -21,13 +22,12 @@
 
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            gap: 20px;
+            padding: 20px 20px;
             background-color: rgba(245, 230, 211, 0.95);
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
             z-index: 1000;
             border-bottom: 1px solid #c4a484;
@@ -55,7 +55,20 @@
             object-fit: cover;
         }
 
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #582f0e;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(88, 47, 14, 0.1);
+            margin: 0;
+            white-space: nowrap;
+            flex-grow: 1;
+        }
+
         .nav-links {
+            margin-left: auto;
             display: flex;
             gap: 2.5rem;
         }
@@ -87,20 +100,6 @@
 
         .nav-links a:hover::after {
             width: 100%;
-        }
-
-        .company-name {
-            font-family: 'Bookman Old Style', 'Bookman', 'URW Bookman L', serif;
-            font-size: 2.5rem;
-            color: #582f0e;
-            text-align: center;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(88, 47, 14, 0.1);
         }
 
         .about-content {
