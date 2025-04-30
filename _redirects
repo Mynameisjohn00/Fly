@@ -1,5 +1,12 @@
-/* /index.html 200
-/about/* /about/about.html 200
-/shop/* /shop/shop.html 200
-/blog/* /blog/blog.html 200
-/rods/* /rods/rods.html 200 
+# Remove the SPA-style redirect
+# /* /index.html 200
+# /about/* /about/about.html 200
+# /shop/* /shop/shop.html 200
+# /blog/* /blog/blog.html 200
+# /rods/* /rods/rods.html 200 
+
+# Simple redirects for cleaner URLs
+/about /about/about.html 200
+/shop /shop/shop.html 200
+/blog /blog/blog.html 200
+/rods /rods/rods.html 200 
