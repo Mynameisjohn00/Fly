@@ -1,3 +1,5 @@
+# Redirects are now handled by _worker.js
+
 # Remove the SPA-style redirect
 # /* /index.html 200
 # /about/* /about/about.html 200

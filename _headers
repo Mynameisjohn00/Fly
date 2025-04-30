@@ -13,3 +13,33 @@
 # Prevent default Cloudflare pages domain from being indexed
 https://*.pages.dev/*
   X-Robots-Tag: noindex
+
+/index.html
+  Cache-Control: public, max-age=3600
+  
+/about/about.html
+  Cache-Control: public, max-age=3600
+  
+/shop/shop.html
+  Cache-Control: public, max-age=3600
+  
+/blog/blog.html
+  Cache-Control: public, max-age=3600
+  
+/rods/rods.html
+  Cache-Control: public, max-age=3600
+
+/*.jpg
+  Cache-Control: public, max-age=86400
+  
+/*.png
+  Cache-Control: public, max-age=86400
+  
+/*.svg
+  Cache-Control: public, max-age=86400
+
+/*.css
+  Cache-Control: public, max-age=86400
+
+/*.js
+  Cache-Control: public, max-age=86400
