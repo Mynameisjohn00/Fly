@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tall Grass Flyrod Company</title>
+    <title>tall grass flyrod company</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Serif+Pro&family=Bookman+Old+Style:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -710,11 +710,11 @@
         </div>
         <h1 class="company-name">Tall Grass Flyrod Company</h1>
         <div class="nav-links">
-            <a href="index.html#portfolio">Portfolio</a>
-            <a href="blog/blog.html">Blog</a>
-            <a href="rods/rods.html">Bamboo Rods</a>
-            <a href="shop/shop.html">Shop</a>
-            <a href="about/about.html">About</a>
+            <a href="/#portfolio">Portfolio</a>
+            <a href="/blog">Blog</a>
+            <a href="/rods">Bamboo Rods</a>
+            <a href="/shop">Shop</a>
+            <a href="/about">About</a>
         </div>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
@@ -762,6 +762,11 @@
                         <div class="image-caption">Classic Fly Reel</div>
                         <div class="camera-settings">Captured with x-t100 f.40 iso 400</div>
                     </div>
+                    <div class="carousel-item">
+                        <img src="Images/DSCF2845.jpg" alt="Fly Fishing Image 5" class="gallery-image">
+                        <div class="image-caption">No.001</div>
+                        <div class="camera-settings">Captured with x-t100 f.40 iso 400</div>
+                    </div>
                 </div>
                 <div class="carousel-nav">
                     <button class="carousel-button prev">&lt;</button>
@@ -769,6 +774,7 @@
                 </div>
                 <div class="carousel-indicators">
                     <div class="indicator active"></div>
+                    <div class="indicator"></div>
                     <div class="indicator"></div>
                     <div class="indicator"></div>
                     <div class="indicator"></div>
@@ -799,8 +805,6 @@
             <div class="contact-info">
                 <h2>Contact Us</h2>
                 <p><strong>Tall Grass Flyrod Company</strong></p>
-                <p>📍 123 River Road<br>Mountain Stream, CO 80123</p>
-                <p>📞 <a href="tel:+1234567890">(123) 456-7890</a></p>
                 <p>✉️ <a href="mailto:info@tallgrassflyrod.com">info@tallgrassflyrod.com</a></p>
                 <p>Follow us on social media:</p>
                 <p>
@@ -821,127 +825,143 @@
     </section>
 
     <script>
-        const carousel = document.querySelector('.carousel-inner');
-        const items = document.querySelectorAll('.carousel-item');
-        const prevButton = document.querySelector('.carousel-button.prev');
-        const nextButton = document.querySelector('.carousel-button.next');
-        const indicators = document.querySelectorAll('.indicator');
-        
-        let currentIndex = 0;
-        const totalItems = items.length;
-        
-        function updateCarousel() {
-            // Update transform with a smooth transition
-            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        // Initialize modal and video elements after DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carousel functionality
+            const carousel = document.querySelector('.carousel-inner');
+            const items = document.querySelectorAll('.carousel-item');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            const indicators = document.querySelectorAll('.indicator');
             
-            // Update indicators
+            let currentIndex = 0;
+            const totalItems = items.length;
+            
+            function updateCarousel() {
+                // Update transform with a smooth transition
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentIndex);
+                });
+                
+                // Update carousel items visibility with a fade effect
+                items.forEach((item, index) => {
+                    if (index === currentIndex) {
+                        item.style.opacity = '1';
+                        item.style.pointerEvents = 'auto';
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.pointerEvents = 'none';
+                    }
+                });
+            }
+            
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            }
+            
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+            }
+            
+            // Event listeners
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+            
             indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentIndex);
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
             });
             
-            // Update carousel items visibility with a fade effect
-            items.forEach((item, index) => {
-                if (index === currentIndex) {
-                    item.style.opacity = '1';
-                    item.style.pointerEvents = 'auto';
-                } else {
-                    item.style.opacity = '0';
-                    item.style.pointerEvents = 'none';
+            // Auto-slide functionality
+            let autoSlideInterval = setInterval(nextSlide, 5000);
+            
+            // Pause auto-slide on hover
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            });
+            
+            // Touch support for mobile devices
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('show');
+                
+                // Prevent body scrolling when menu is open
+                document.body.style.overflow = navLinks.classList.contains('show') ? 'hidden' : 'auto';
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('show')) {
+                    toggleMenu();
                 }
             });
-        }
-        
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
-        }
-        
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-            updateCarousel();
-        }
-        
-        // Event listeners
-        nextButton.addEventListener('click', nextSlide);
-        prevButton.addEventListener('click', prevSlide);
-        
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentIndex = index;
+
+            // Close menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('show')) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Add window resize listener
+            window.addEventListener('resize', function() {
+                // Force update of carousel display
                 updateCarousel();
             });
         });
         
-        // Auto-slide functionality
-        let autoSlideInterval = setInterval(nextSlide, 5000);
-        
-        // Pause auto-slide on hover
-        carousel.addEventListener('mouseenter', () => {
-            clearInterval(autoSlideInterval);
-        });
-        
-        carousel.addEventListener('mouseleave', () => {
-            autoSlideInterval = setInterval(nextSlide, 5000);
-        });
-        
-        // Touch support for mobile devices
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        carousel.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-        });
-        
-        carousel.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].clientX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
-            }
-        }
-
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
+        // Hamburger menu toggle function must be accessible globally
         function toggleMenu() {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('show');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
             
-            // Prevent body scrolling when menu is open
-            document.body.style.overflow = navLinks.classList.contains('show') ? 'hidden' : 'auto';
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('show')) {
-                toggleMenu();
+            if (hamburger && navLinks) {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('show');
+                document.body.style.overflow = navLinks.classList.contains('show') ? 'hidden' : 'auto';
             }
-        });
-
-        // Close menu when clicking a link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('show')) {
-                    toggleMenu();
-                }
-            });
-        });
-
-        // Add window resize listener
-        window.addEventListener('resize', function() {
-            // Force update of carousel display
-            updateCarousel();
-        });
+        }
     </script>
 </body>
 </html>

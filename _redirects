@@ -1,14 +1,26 @@
-# Redirects are now handled by _worker.js
+# Redirect rules for clean URLs
+/about /about/about 200
+/shop /shop/shop 200
+/blog /blog/blog 200
+/rods /rods/rods 200
 
-# Remove the SPA-style redirect
-# /* /index.html 200
-# /about/* /about/about.html 200
-# /shop/* /shop/shop.html 200
-# /blog/* /blog/blog.html 200
-# /rods/* /rods/rods.html 200 
+# Also handle direct access to HTML files
+/about.html /about/about 301
+/shop.html /shop/shop 301
+/blog.html /blog/blog 301
+/rods.html /rods/rods 301
 
-# Simple redirects for cleaner URLs
-/about /about/about.html 200
-/shop /shop/shop.html 200
-/blog /blog/blog.html 200
-/rods /rods/rods.html 200 
+# Handle trailing slashes
+/about/ /about/about 200
+/shop/ /shop/shop 200
+/blog/ /blog/blog 200
+/rods/ /rods/rods 200
+
+# Handle nested blog routes - prevent path duplication
+/blog/blog/blog.html /blog/blog 301
+/blog/rods/rods.html /rods/rods 301
+/blog/shop/shop.html /shop/shop 301
+/blog/about/about.html /about/about 301
+
+# Fallback for 404s
+/* /index.html 404
