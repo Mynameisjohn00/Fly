@@ -102,6 +102,58 @@
             width: 100%;
         }
 
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dropdown-toggle::after {
+            content: '▼';
+            font-size: 0.7rem;
+            margin-left: 5px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(245, 230, 211, 0.95);
+            min-width: 150px;
+            box-shadow: 0 8px 16px rgba(139, 69, 19, 0.15);
+            border-radius: 0 0 8px 8px;
+            padding: 10px 0;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 15px;
+            white-space: nowrap;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: rgba(139, 69, 19, 0.1);
+        }
+
         .about-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -174,7 +226,13 @@
         </div>
         <div class="nav-links">
             <a href="/">Portfolio</a>
-            <a href="/blog">Blog</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">Blog</a>
+                <div class="dropdown-menu">
+                    <a href="/blog/blog.html">All Posts</a>
+                    <a href="/blog/events.html">Events</a>
+                </div>
+            </div>
             <a href="/rods">Bamboo Rods</a>
             <a href="/shop">Shop</a>
             <a href="/about">About</a>
@@ -184,5 +242,69 @@
     <main class="about-content">
         <img src="../Images/about.png" alt="Tall Grass Flyrod Company Workshop" class="about-image">
     </main>
+    
+    <footer style="text-align: center; padding: 20px 0; background-color: rgba(245, 230, 211, 0.9); border-top: 1px solid #c4a484; margin-top: 30px;">
+        <p>Tallgrass Flyrod&#8482; Company. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+            }
+        });
+        
+        // Dropdown functionality for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            
+            // Enable click toggle for mobile devices
+            if (dropdownToggle) {
+                dropdownToggle.addEventListener('click', function(e) {
+                    // Only handle click events on mobile
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const isExpanded = dropdownMenu.classList.contains('show-mobile');
+                        
+                        // Close any open dropdowns first
+                        document.querySelectorAll('.dropdown-menu.show-mobile').forEach(menu => {
+                            if (menu !== dropdownMenu) {
+                                menu.classList.remove('show-mobile');
+                            }
+                        });
+                        
+                        // Toggle the current dropdown
+                        dropdownMenu.classList.toggle('show-mobile', !isExpanded);
+                    }
+                });
+            }
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!dropdownToggle?.contains(e.target) && !dropdownMenu?.contains(e.target)) {
+                    dropdownMenu?.classList.remove('show-mobile');
+                }
+            });
+            
+            // Add window resize listener
+            window.addEventListener('resize', function() {
+                // Remove mobile-specific classes if window is resized above mobile breakpoint
+                if (window.innerWidth > 768) {
+                    document.querySelectorAll('.dropdown-menu.show-mobile').forEach(menu => {
+                        menu.classList.remove('show-mobile');
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
